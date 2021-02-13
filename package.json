@@ -1,0 +1,11 @@
+{
+  "name": "prueba-tecnica_back-end",
+  "version": "1.0.0",
+  "description": "Proyecto realizado para dar solución a la prueba técnica, cuyo objetivo es el de validar los conocimientos adquiridos durante el Bootcamp de Back End con Academia Geek",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maria Helena Santos Pineda",
+  "license": "ISC"
+}

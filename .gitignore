@@ -1,3 +1,10 @@
+# dependencies
+.vscode
+
+# production
+build
+
+
 # Logs
 logs
 *.log
