@@ -1,0 +1,59 @@
+@import "~bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins/_breakpoints";
+
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/brands";
+
+@import "./styles/colors";
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .header {
+    nav.navbar {
+      .navbar-brand {
+        img {
+          width: 50px;
+        }
+      }
+
+      .dropdown-menu.show {
+        left: auto;
+        right: 0;
+      }
+    }
+  }
+
+  main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 75px;
+
+    .authenticateIdentity {
+      .card {
+        img {
+          margin: auto;
+          width: max-content;
+        }
+      }
+    }
+  }
+  
+  footer {
+    margin-top: auto;
+    padding-top: 2.5rem;
+    .footer-copyright {
+      background-color: #343a40;
+      color: white;
+    }
+  }
+}
