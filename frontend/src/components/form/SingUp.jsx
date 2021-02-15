@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './SingIn-Up.scss';
 import { Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import logo2 from '../../images/avater.png';

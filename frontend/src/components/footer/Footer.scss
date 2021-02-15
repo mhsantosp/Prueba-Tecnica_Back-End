@@ -1,0 +1,39 @@
+@import "../../styles/colors";
+
+footer {
+  .social {
+    justify-content: center;
+    a {
+      display: block;
+      font-size: 1.2rem;
+      width: max-content;
+
+      i.fab {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        height: 25px;
+      }
+
+      i.fab.fa-linkedin-in {
+        color: $linkedin;
+        &:hover {
+          background-color: $linkedin;
+        }
+      }
+
+      i.fab.fa-github {
+        color: $github;
+        &:hover {
+          background-color: $github;
+        }
+      }
+    }
+
+    a:hover i.fab {
+      color: white;
+      border-radius: 10%;
+    }
+  }
+}

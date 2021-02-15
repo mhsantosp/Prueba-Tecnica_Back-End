@@ -1,0 +1,26 @@
+section.registros {
+  article.authenticateIdentity {
+    .card {
+      max-width: 450px;
+      margin: auto;
+      box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.85);
+
+      background: rgba(212,228,239,1);
+      background: -moz-linear-gradient(45deg, rgba(212,228,239,1) 0%, rgba(46,134,222,1) 100%);
+      background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(212,228,239,1)), color-stop(100%, rgba(46,134,222,1)));
+      background: -webkit-linear-gradient(45deg, rgba(212,228,239,1) 0%, rgba(46,134,222,1) 100%);
+      background: -o-linear-gradient(45deg, rgba(212,228,239,1) 0%, rgba(46,134,222,1) 100%);
+      background: -ms-linear-gradient(45deg, rgba(212,228,239,1) 0%, rgba(46,134,222,1) 100%);
+      background: linear-gradient(45deg, rgba(212,228,239,1) 0%, rgba(46,134,222,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#2e86de', GradientType=1 );
+
+      img {
+        width: max-content;
+        margin: auto;
+        border-radius: 50%;
+        margin-top: 1rem;
+        background-color: white;
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import Logo from '../../images/logoPi.svg';
+import './Header.scss';
 
 export default class Header extends Component {
   render() {
@@ -22,11 +23,11 @@ export default class Header extends Component {
               <Nav.Link href="/">Ingresar</Nav.Link>
               <NavDropdown title="Usuario" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="/perfil">Perfil</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Tareas</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Pendientes</NavDropdown.Item>
+                <NavDropdown.Item href="/tareas">Tareas</NavDropdown.Item>
+                <NavDropdown.Item href="/pendientes">Pendientes</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Inicio</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4">Salir</NavDropdown.Item>
+                <NavDropdown.Item href="/inicio">Inicio</NavDropdown.Item>
+                <NavDropdown.Item href="#">Salir</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
