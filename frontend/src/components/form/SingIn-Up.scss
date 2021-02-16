@@ -21,6 +21,13 @@ section.registros {
         margin-top: 1rem;
         background-color: white;
       }
+      div.form {
+        form {
+          button {
+            border-radius: 20px;;
+          }
+        }
+      }
     }
   }
 }

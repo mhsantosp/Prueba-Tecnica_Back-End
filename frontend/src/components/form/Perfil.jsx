@@ -40,7 +40,7 @@ export default function Perfil() {
               <Card.Header className="h3">Datos Registrados</Card.Header>
               <Card.Body>
                 <Form noValidate onSubmit={handleSubmit}>
-                  <Form.Row className="mb-3">
+                  <Form.Row>
                     <Form.Group as={Col} md="6" controlId="validationFormik101">
                       <Form.Label className="h5">Nombres</Form.Label>
                       <Form.Control

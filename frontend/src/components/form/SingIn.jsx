@@ -33,7 +33,7 @@ export default class Login extends Component {
 
   handleSubmit = async e => {
     e.preventDefault()
-    axios.get(`${apiBD}?user=${this.state.form.username}&password=${this.state.form.password}`)
+    axios.get(`${apiBD}?email=${this.state.form.username}&password=${this.state.form.password}`)
       .then(res => {
         console.log(res.data);
         return res.data;
@@ -46,7 +46,7 @@ export default class Login extends Component {
           localStorage.setItem('lastname', respuesta.lastname, { path: "/" });
           localStorage.setItem('email', respuesta.email, { path: "/" });
           localStorage.setItem('user', respuesta.user, { path: "/" });
-          window.location.href = '/nuevo-usuario'; //Ruta de redirección
+          window.location.href = '/tareas'; //Ruta de redirección
           console.log(`Usuario correcto: Bienbenid@ ${respuesta.name} ${respuesta.lastname}`);
         } else {
           console.log('Usuario y/o Password incorrecto');
@@ -73,7 +73,7 @@ export default class Login extends Component {
                         <div className="input-group-prepend">
                           <div className="input-group-text"><i className="fas fa-user"></i></div>
                         </div>
-                        <input type="text" className="form-control" name="username" onChange={this.handleChange} placeholder="Usuario" required />
+                        <input type="email" className="form-control" name="username" onChange={this.handleChange} placeholder="Correo electronico" required />
                       </div>
                     </div>
 

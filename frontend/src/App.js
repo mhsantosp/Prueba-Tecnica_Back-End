@@ -15,7 +15,7 @@ function App() {
         <Header />
         <main>
           <Switch>
-          <Route exact path="/" component={Ingresar} />
+          <Route exact path="/" render={(props) => <Ingresar {...props} />} />
           <Route exact path="/nuevo-usuario" component={NuevoUsuario} />
           <Route exact path="/perfil" component={Perfil} />
           <Route exact path="/tareas" component={Tareas} />
