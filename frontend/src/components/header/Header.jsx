@@ -5,15 +5,15 @@ import './Header.scss';
 
 export default class Header extends React.Component {
   state = {
-    usuario: localStorage.getItem('name')
+    usuario: localStorage.getItem('nombres')
   }
 
   cerrarSesion = () => {
-    localStorage.removeItem('id', { path: "/" });
-    localStorage.removeItem('name', { path: "/" });
-    localStorage.removeItem('lastname', { path: "/" });
+    localStorage.removeItem('_id', { path: "/" });
+    localStorage.removeItem('nombres', { path: "/" });
+    localStorage.removeItem('apellidos', { path: "/" });
     localStorage.removeItem('email', { path: "/" });
-    localStorage.removeItem('user', { path: "/" });
+    localStorage.removeItem('usuario', { path: "/" });
     window.location.href = '/';
   }
 
@@ -34,7 +34,7 @@ export default class Header extends React.Component {
                 ?
                 <Nav.Link href="/">Ingresar</Nav.Link>
                 :
-                <NavDropdown title={localStorage.getItem('name')} id="collasible-nav-dropdown">
+                <NavDropdown title={localStorage.getItem('nombres')} id="collasible-nav-dropdown">
                   <NavDropdown.Item href="/perfil">Perfil</NavDropdown.Item>
                   <NavDropdown.Item href="/tareas">Tareas</NavDropdown.Item>
                   <NavDropdown.Item onClick={() => this.cerrarSesion()}>Salir</NavDropdown.Item>

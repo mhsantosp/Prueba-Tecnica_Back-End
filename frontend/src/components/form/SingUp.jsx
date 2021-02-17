@@ -5,8 +5,6 @@ import { Button } from 'react-bootstrap';
 import logo2 from '../../images/avater.png';
 import axios from "axios";
 
-// const apiBD = 'http://api-fake-procrastin-app.vercel.app/users';
-
 export default class FormSignUp extends Component {
   constructor(props) {
     super()
@@ -15,11 +13,11 @@ export default class FormSignUp extends Component {
 
   state = {
     form: {
-      firstName: '',
-      lastName: '',
+      nombres: '',
+      apellidos: '',
       email: '',
-      userName: '',
-      password: ''
+      usuario: '',
+      pasword: ''
     }
   }
 
@@ -27,7 +25,7 @@ export default class FormSignUp extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        [e.target.name]: e.target.value
+        [e.target.nombres]: e.target.value
       }
     });
   };
@@ -35,13 +33,13 @@ export default class FormSignUp extends Component {
   handleSubmit = e => {
     e.preventDefault();
     let data = {
-      name: this.state.form.firstName,
-      lastname: this.state.form.lastName,
+      nombres: this.state.form.nombres,
+      apellidos: this.state.form.apellidos,
       email: this.state.form.email,
-      user: this.state.form.userName,
-      password: this.state.form.password
+      usuario: this.state.form.usuario,
+      pasword: this.state.form.pasword
     }
-    axios.post('https://api-fake-procrastin-app.vercel.app/users', data)
+    axios.post('http://localhost:4000/api/personas', data)
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -66,12 +64,12 @@ export default class FormSignUp extends Component {
                   <div className="form-row">
                     <div className="form-group col-md-6">
                       <label >Nombre</label>
-                      <input type="text" className="form-control firstName" name="firstName" id="firstName" placeholder="Nombre" value={this.state.form.firstName} onChange={this.handleChange} required />
+                      <input type="text" className="form-control firstName" name="nombres" id="firstName" placeholder="Nombre" onChange={this.handleChange} required />
                     </div>
 
                     <div className="form-group col-md-6">
                       <label >Apellido</label>
-                      <input type="text" className="form-control lastName" name="lastName" id="lastName" placeholder="Apellido" value={this.state.form.lastName} onChange={this.handleChange} required />
+                      <input type="text" className="form-control lastName" name="apellidos" id="lastName" placeholder="Apellido"  onChange={this.handleChange} required />
                     </div>
 
                     <div className="form-group col-md-12">
@@ -80,7 +78,7 @@ export default class FormSignUp extends Component {
                         <div className="input-group-prepend">
                           <div className="input-group-text"><i className="fas fa-at"></i></div>
                         </div>
-                        <input type="email" className="form-control" name="email" id="email" placeholder="Correo electrónico" value={this.state.form.email} onChange={this.handleChange} required />
+                        <input type="email" className="form-control" name="email" id="email" placeholder="Correo electrónico"  onChange={this.handleChange} required />
                       </div>
                     </div>
 
@@ -90,7 +88,7 @@ export default class FormSignUp extends Component {
                         <div className="input-group-prepend">
                           <div className="input-group-text"><i className="fas fa-user"></i></div>
                         </div>
-                        <input type="text" className="form-control" name="userName" id="userName" placeholder="Usuario" value={this.state.form.userName} onChange={this.handleChange} required />
+                        <input type="text" className="form-control" name="usuario" id="userName" placeholder="Usuario" onChange={this.handleChange} required />
                       </div>
                     </div>
 
@@ -100,7 +98,7 @@ export default class FormSignUp extends Component {
                         <div className="input-group-prepend">
                           <div className="input-group-text"><i className="fas fa-user-lock"></i></div>
                         </div>
-                        <input type="password" className="form-control" name="password" id="password" placeholder="********" value={this.state.form.password} onChange={this.handleChange} required />
+                        <input type="password" className="form-control" name="pasword" id="password" placeholder="********"  onChange={this.handleChange} required />
                       </div>
                     </div>
                   </div>

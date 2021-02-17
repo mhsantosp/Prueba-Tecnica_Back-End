@@ -6,7 +6,7 @@ import NuevoUsuario from "./components/form/SingUp";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/footer";
 import Perfil from "./components/form/Perfil";
-import Tareas from "./components/task/Tareas"
+import Tareas from "./components/task/CollectionTasks"
 
 function App() {
   return (

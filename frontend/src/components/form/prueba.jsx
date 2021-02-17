@@ -5,7 +5,6 @@ function RegistrationForm(props) {
     email: "",
     password: ""
   })
-
   const handleChange = (e) => {
     const { id, value } = e.target
     setState(prevState => ({
@@ -13,7 +12,6 @@ function RegistrationForm(props) {
       [id]: value
     }))
   }
-
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       ...
@@ -33,7 +31,6 @@ function RegistrationForm(props) {
         value={state.password}
         onChange={handleChange}
       />
-      ...
     </div>
   );
 }

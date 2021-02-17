@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import logo2 from '../../images/avater.png';
 import axios from "axios";
 
-const apiBD = 'https://api-fake-procrastin-app.vercel.app/users';
+const apiBD = 'http://localhost:4000/api/personas';
 
 export default class Login extends Component {
   constructor(props) {
@@ -14,10 +14,10 @@ export default class Login extends Component {
   }
 
   state = {
-    usuario: localStorage.getItem('user'),
+    usuario: localStorage.getItem('usuario'),
     form: {
-      username: '',
-      password: ''
+      usuario: '',
+      pasword: ''
     }
   }
 
@@ -25,7 +25,7 @@ export default class Login extends Component {
     await this.setState({
       form: {
         ...this.state.form,
-        [e.target.name]: e.target.value
+        [e.target.nombres]: e.target.value
       }
     });
     // console.log(this.state.form);
@@ -33,7 +33,7 @@ export default class Login extends Component {
 
   handleSubmit = async e => {
     e.preventDefault()
-    axios.get(`${apiBD}?email=${this.state.form.username}&password=${this.state.form.password}`)
+    axios.get(`${apiBD}?email=${this.state.form.usuario}&pasword=${this.state.form.pasword}`)
       .then(res => {
         console.log(res.data);
         return res.data;
@@ -41,13 +41,13 @@ export default class Login extends Component {
       .then(res => {
         if (res.length > 0) {
           var respuesta = res[0];
-          localStorage.setItem('id', respuesta.id, { path: "/" });
-          localStorage.setItem('name', respuesta.name, { path: "/" });
-          localStorage.setItem('lastname', respuesta.lastname, { path: "/" });
+          localStorage.setItem('_id', respuesta._id, { path: "/" });
+          localStorage.setItem('nombres', respuesta.nombres, { path: "/" });
+          localStorage.setItem('apellidos', respuesta.apellidos, { path: "/" });
           localStorage.setItem('email', respuesta.email, { path: "/" });
-          localStorage.setItem('user', respuesta.user, { path: "/" });
+          localStorage.setItem('usuario', respuesta.usuario, { path: "/" });
           window.location.href = '/tareas'; //Ruta de redirección
-          console.log(`Usuario correcto: Bienbenid@ ${respuesta.name} ${respuesta.lastname}`);
+          console.log(`Usuario correcto: Bienbenid@ ${respuesta.nombres} ${respuesta.apellidos}`);
         } else {
           console.log('Usuario y/o Password incorrecto');
         }
@@ -73,7 +73,7 @@ export default class Login extends Component {
                         <div className="input-group-prepend">
                           <div className="input-group-text"><i className="fas fa-user"></i></div>
                         </div>
-                        <input type="email" className="form-control" name="username" onChange={this.handleChange} placeholder="Correo electronico" required />
+                        <input type="email" className="form-control" name="usuario" onChange={this.handleChange} placeholder="Correo electronico" required />
                       </div>
                     </div>
 
@@ -83,7 +83,7 @@ export default class Login extends Component {
                         <div className="input-group-prepend">
                           <div className="input-group-text"><i className="fas fa-user-lock"></i></div>
                         </div>
-                        <input type="password" className="form-control" name="password" onChange={this.handleChange} placeholder="********" required />
+                        <input type="password" className="form-control" name="pasword" onChange={this.handleChange} placeholder="********" required />
                       </div>
                     </div>
                   </div>

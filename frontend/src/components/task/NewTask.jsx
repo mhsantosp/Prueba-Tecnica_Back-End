@@ -4,8 +4,8 @@ import Agregar from '../../images/add.png';
 import axios from 'axios';
 
 export default function NuevaTarea(props) {
-  const id_user = localStorage.getItem('id')
-  const db = `https://api-fake-procrastin-app.vercel.app/users/${id_user}`
+  const id_user = localStorage.getItem('_id')
+  const db = `http://localhost:4000/api/tareas/${id_user}`
 
   const [show, setShow] = useState(false);
 
@@ -23,27 +23,27 @@ export default function NuevaTarea(props) {
   const handleOnClick = async (event) => {
     event.preventDefault();
     event.target.disabled = true;
-    const lastTask = props.user.tasks[props.user.tasks.length - 1]
-    if (lastTask.id == undefined) {
-      lastTask = {
-        id: 0
-      }
-    } else { }
+    // const lastTask = props.usuario.tasks[props.usuario.tasks.length]
+    // if (lastTask._id == undefined) {
+    //   lastTask = {
+    //     _id: 0
+    //   }
+    // } else { }
 
-    const task = {
-      id: parseInt(lastTask.id) + 1,
-      task: newTask
-    }
+    // const task = {
+    //   _id: parseInt(lastTask._id) + 1,
+    //   task: newTask
+    // }
 
-    props.user.tasks.push(task)
+    // props.usuario.tasks.push(task)
 
-    axios.put(db, props.user)
+    axios.post(db, props.usuario)
       .then(response => {
         props.peticionGet()
         handleShow(false)
       })
 
-    console.log(props.user)
+    console.log(props.usuario)
   };
 
   return (
@@ -63,7 +63,6 @@ export default function NuevaTarea(props) {
               <Table striped bordered hover size="sm" responsive>
                 <thead>
                   <tr>
-                    <th>#</th>
                     <th>Imagen</th>
                     <th>Nombre</th>
                     <th>Prioridad</th>
@@ -72,36 +71,17 @@ export default function NuevaTarea(props) {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td>
                     <td>
                       <input name="task" value={newTask.task}
-                        onChange={handleChange} className="form-control input" type="text" />
+                        onChange={handleChange} type="file" />
                     </td>
                     <td>
                       <input name="task" value={newTask.task}
-                        onChange={handleChange} className="form-control input" type="text" />
+                        onChange={handleChange} type="text" />
                     </td>
                     <td>
                       <input name="task" value={newTask.task}
-                        onChange={handleChange} className="form-control input" type="text" />
-                    </td>
-                    <td>
-                      <input type="date" name="vencimiento" id="vencimiento" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>
-                      <input name="task" value={newTask.task}
-                        onChange={handleChange} className="form-control input" type="text" />
-                    </td>
-                    <td>
-                      <input name="task" value={newTask.task}
-                        onChange={handleChange} className="form-control input" type="text" />
-                    </td>
-                    <td>
-                      <input name="task" value={newTask.task}
-                        onChange={handleChange} className="form-control input" type="text" />
+                        onChange={handleChange} type="text" />
                     </td>
                     <td>
                       <input type="date" name="vencimiento" id="vencimiento" />
