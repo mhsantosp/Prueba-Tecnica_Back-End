@@ -1,5 +1,10 @@
 section.registros {
+  height: 100%;
+
   article.authenticateIdentity {
+    height: 100%;
+    display: flex;
+    
     .card {
       max-width: 450px;
       margin: auto;
