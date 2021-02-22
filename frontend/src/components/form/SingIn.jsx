@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './SingIn-Up.scss';
 import { Link } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import logo2 from '../../images/avater.png';
 import axios from "axios";
 
@@ -28,11 +28,12 @@ export default class Login extends Component {
         [e.target.nombres]: e.target.value
       }
     });
-    // console.log(this.state.form);
+    console.log(this.state.form);
   };
 
   handleSubmit = async e => {
-    e.preventDefault()
+    e.preventDefault(); 
+    debugger
     axios.get(`${apiBD}?email=${this.state.form.usuario}&pasword=${this.state.form.pasword}`)
       .then(res => {
         console.log(res.data);
@@ -46,7 +47,7 @@ export default class Login extends Component {
           localStorage.setItem('apellidos', respuesta.apellidos, { path: "/" });
           localStorage.setItem('email', respuesta.email, { path: "/" });
           localStorage.setItem('usuario', respuesta.usuario, { path: "/" });
-          window.location.href = '/tareas'; //Ruta de redirección
+          {/*window.location.href = '/tareas'; //Ruta de redirección*/}
           console.log(`Usuario correcto: Bienbenid@ ${respuesta.nombres} ${respuesta.apellidos}`);
         } else {
           console.log('Usuario y/o Password incorrecto');
@@ -65,10 +66,10 @@ export default class Login extends Component {
             <img className="img-fluid card-img-top p-3" src={logo2} alt="Logo" loading="lazy" id="logo2" />
             <div className="form">
               <div className="form-log-in">
-                <form className="card-body" onSubmit={this.handleSubmit} id="form">
+                <Form className="card-body" onSubmit={this.handleSubmit} id="form">
                   <div className="form-row">
                     <div className="form-group col-12">
-                      <label>Usuario</label>
+                      <label>Correo electrónico</label>
                       <div className="input-group mb-2">
                         <div className="input-group-prepend">
                           <div className="input-group-text"><i className="fas fa-user"></i></div>
@@ -89,7 +90,7 @@ export default class Login extends Component {
                   </div>
 
                   <Button type="submit" variant="info" className="btn btn-form">Iniciar sesión</Button>
-                </form>
+                </Form>
                 <div className="card-footer">
                   <p className="card-text text-right">
                     No estas registrado? <Link to="/nuevo-usuario" rel="noopener noreferrer">Regístrate</Link>
@@ -98,26 +99,6 @@ export default class Login extends Component {
               </div>
             </div>
           </div>
-
-          {/* Modal HTML
-          <div id="myModal" className="modal fade">
-            <div className="modal-dialog modal-confirm">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <div className="icon-box">
-                    <i className="material-icons">&#xE876;</i>
-                  </div>
-                  <h4 className="modal-title w-100">Awesome!</h4>
-                </div>
-                <div className="modal-body">
-                  <p className="text-center">Your booking has been confirmed. Check your email for detials.</p>
-                </div>
-                <div className="modal-footer">
-                  <button className="btn btn-success btn-block" data-dismiss="modal">OK</button>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </article>
       </section>
     );

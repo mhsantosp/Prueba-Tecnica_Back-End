@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Card, Table } from 'react-bootstrap';
+import { Modal, Button, Card, Table, Image } from 'react-bootstrap';
 import Editar from '../../images/edit.png';
 import axios from 'axios';
 
-export default function NuevaTarea(props) {
+export default function EditarTarea(props) {
   const id_user = localStorage.getItem('_id')
   const db = `http://localhost:4000/api/tareas/${id_user}`
 
@@ -37,9 +37,15 @@ export default function NuevaTarea(props) {
     return employees && employees.map(({ _id, imgtarea, nametarea, prioridadtarea, fechavencimiento }) => {
       return (
         <tr key={_id}>
-          <td>{imgtarea}</td>
-          <td>{nametarea}</td>
-          <td>{prioridadtarea}</td>
+          <td>
+            <Image src={imgtarea} alt="Imagen de la tarea" class="imgTarea" width="80" rounded />
+          </td>
+          <td>
+            <input type="text" value={nametarea} />
+          </td>
+          <td>
+            <input type="text" value={prioridadtarea} />
+          </td>
           <td>{fechavencimiento}</td>
         </tr>
       )

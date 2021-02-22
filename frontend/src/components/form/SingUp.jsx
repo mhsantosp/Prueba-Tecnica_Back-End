@@ -1,122 +1,158 @@
-import React, { Component } from "react";
+import React, { useState } from 'react';
 import './SingIn-Up.scss';
-import { Link } from "react-router-dom";
-import { Button } from 'react-bootstrap';
 import logo2 from '../../images/avater.png';
-import axios from "axios";
+import { Link } from "react-router-dom";
+import { Form, InputGroup, Button, Col } from 'react-bootstrap';
+import { useFormik } from "formik";
+import Axios from "axios";
 
-export default class FormSignUp extends Component {
-  constructor(props) {
-    super()
-    console.log(props);
-  }
+export default function Prueba() {
+  const [data, setData] = useState({});
 
-  state = {
-    form: {
-      nombres: '',
-      apellidos: '',
-      email: '',
-      usuario: '',
-      pasword: ''
-    }
-  }
+  const URL = 'http://localhost:4000/api/personas';
 
-  handleChange = e => {
-    this.setState({
-      form: {
-        ...this.state.form,
-        [e.target.nombres]: e.target.value
-      }
-    });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    let data = {
-      nombres: this.state.form.nombres,
-      apellidos: this.state.form.apellidos,
-      email: this.state.form.email,
-      usuario: this.state.form.usuario,
-      pasword: this.state.form.pasword
-    }
-    axios.post('http://localhost:4000/api/personas', data)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        // alert('Correcto');
-        this.props.history.push('/')
+  const { values, isSubmitting, handleSubmit, handleChange, errors } = useFormik({
+    initialValues: {
+      nombres: '', apellidos: '', email: '', usuario: '', pasword: '',
+    },
+    onSubmit: values => {
+      console.log(values);
+      // Enviar los valores a la Base de Datos
+      Axios.post(URL, {
+        nombres: values.nombres,
+        apellidos: values.apellidos,
+        email: values.email,
+        usuario: values.usuario,
+        pasword: values.pasword
       })
-      .catch(err =>
-        console.log(err),
-        // alert('Incorrecto')
-      );
-  }
+        .then(response => {
+          console.log(response);
+          setData(response.data);
+          window.location.href = '/';
+        })
+    },
+    validate: values => {
+      const errors = {};
+      if (!values.nombres || values.nombres.length < 2) errors.nombres = "Nombre inválido";
+      if (!values.apellidos || values.apellidos.length < 2) errors.apellidos = "Apellido inválido";
+      if (!values.email) {
+        errors.email = 'Requerido';
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+      ) {
+        errors.email = 'Correo electrónico inválido';
+      }
 
-  render() {
-    return (
-      <section className="container-fluid registros">
-        <article className="authenticateIdentity">
-          <div className="card">
-            <img className="img-fluid card-img-top p-3" src={logo2} alt="Logo" loading="lazy" id="logo2" />
-            <div className="form">
-              <div className="form-sign-up">
-                <form className="card-body" onSubmit={this.handleSubmit}>
-                  <div className="form-row">
-                    <div className="form-group col-md-6">
-                      <label >Nombre</label>
-                      <input type="text" className="form-control firstName" name="nombres" id="firstName" placeholder="Nombre" onChange={this.handleChange} required />
-                    </div>
+      if (!values.usuario || values.usuario.length < 2) errors.usuario = "Usuario inválido";
 
-                    <div className="form-group col-md-6">
-                      <label >Apellido</label>
-                      <input type="text" className="form-control lastName" name="apellidos" id="lastName" placeholder="Apellido"  onChange={this.handleChange} required />
-                    </div>
+      const passwordRegex = /(?=.*[0-9])/;
+      if (!values.pasword) {
+        errors.pasword = "Requerido";
+      } else if (values.pasword.length < 8) {
+        errors.pasword = "La contraseña debe tener 8 caracteres.";
+      } else if (!passwordRegex.test(values.pasword)) {
+        errors.pasword = "Contraseña invalida. Debe contener un número.";
+      }
 
-                    <div className="form-group col-md-12">
-                      <label >Correo electrónico</label>
-                      <div className="input-group mb-2">
-                        <div className="input-group-prepend">
-                          <div className="input-group-text"><i className="fas fa-at"></i></div>
-                        </div>
-                        <input type="email" className="form-control" name="email" id="email" placeholder="Correo electrónico"  onChange={this.handleChange} required />
-                      </div>
-                    </div>
+      return errors;
+    }
+  });
+  console.log(errors);
+  return (
+    <section className="container-fluid registros">
+      <article className="authenticateIdentity">
+        <div className="card">
+          <img className="img-fluid card-img-top p-3" src={logo2} alt="Logo" loading="lazy" id="logo2" />
+          <div className="form">
+            <div className="form-log-in">
+              <Form className="card-body" onSubmit={handleSubmit}>
+                <Form.Row>
+                  <Form.Group as={Col} sm="12" md="6">
+                    <Form.Label>Nombres</Form.Label>
+                    <Form.Control
+                      value={values.nombres}
+                      onChange={handleChange}
+                      name="nombres"
+                      placeholder="Nombres"
+                      type="text"
+                    />
+                    <Form.Text>{errors.nombres ? errors.nombres : ''}</Form.Text>
+                  </Form.Group>
 
-                    <div className="form-group col-md-6">
-                      <label >Usuario</label>
-                      <div className="input-group mb-2">
-                        <div className="input-group-prepend">
-                          <div className="input-group-text"><i className="fas fa-user"></i></div>
-                        </div>
-                        <input type="text" className="form-control" name="usuario" id="userName" placeholder="Usuario" onChange={this.handleChange} required />
-                      </div>
-                    </div>
+                  <Form.Group as={Col} sm="12" md="6">
+                    <Form.Label>Apellidos</Form.Label>
+                    <Form.Control
+                      value={values.apellidos}
+                      onChange={handleChange}
+                      name="apellidos"
+                      placeholder="Apellidos"
+                      type="text"
+                    />
+                    <Form.Text>{errors.apellidos ? errors.apellidos : ''}</Form.Text>
+                  </Form.Group>
 
-                    <div className="form-group col-md-6">
-                      <label >Contraseña</label>
-                      <div className="input-group mb-2">
-                        <div className="input-group-prepend">
-                          <div className="input-group-text"><i className="fas fa-user-lock"></i></div>
-                        </div>
-                        <input type="password" className="form-control" name="pasword" id="password" placeholder="********"  onChange={this.handleChange} required />
-                      </div>
-                    </div>
-                  </div>
+                  <Form.Group as={Col} sm="12" md="12">
+                    <Form.Label>Correo electrónico</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text><i className="fas fa-envelope"></i></InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        value={values.email}
+                        onChange={handleChange}
+                        name="email"
+                        placeholder="Correo electrónico"
+                        type="email"
+                      />
+                    </InputGroup>
+                    <Form.Text>{errors.email ? errors.email : ''}</Form.Text>
+                  </Form.Group>
 
-                  <Button type="submit" variant="info" className="btn-form">Regístrate</Button>
-                </form>
-                <div className="card-footer">
-                  <p className="card-text forgot-password text-right">
-                    Si ya estas registrado <Link to="/" rel="noopener noreferrer">Inicia sesión</Link>
-                  </p>
-                </div>
+                  <Form.Group as={Col} sm="12" md="6">
+                    <Form.Label>Usuario</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text><i className="fas fa-at"></i></InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        value={values.usuario}
+                        onChange={handleChange}
+                        name="usuario"
+                        placeholder="Usuario"
+                        type="text"
+                      />
+                    </InputGroup>
+                    <Form.Text>{errors.usuario ? errors.usuario : ''}</Form.Text>
+                  </Form.Group>
+
+                  <Form.Group as={Col} sm="12" md="6">
+                    <Form.Label>Contraseña</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text><i className="fas fa-user-lock"></i></InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        value={values.pasword}
+                        onChange={handleChange}
+                        name="pasword"
+                        placeholder="**********"
+                        type="password"
+                      />
+                    </InputGroup>
+                    <Form.Text>{errors.pasword ? errors.pasword : ''}</Form.Text>
+                  </Form.Group>
+                </Form.Row>
+                <Button type="submit" variant="info" className="btn-form" disabled={isSubmitting}>Registrarse</Button>
+              </Form>
+              <div className="card-footer">
+                <p className="card-text text-right">
+                  Si ya estas registrado <Link to="/" rel="noopener noreferrer">Inicia sesión</Link>
+                </p>
               </div>
             </div>
           </div>
-        </article>
-      </section>
-    );
-  }
+        </div>
+      </article>
+    </section>
+  );
 }
-
-// export default FormSignUp;

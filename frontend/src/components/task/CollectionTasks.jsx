@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Table, ButtonGroup, Button } from 'react-bootstrap';
+import { Card, Table, Image, ButtonGroup, Button } from 'react-bootstrap';
 import Editar from '../../images/edit.png';
 import Eliminar from '../../images/delete.png';
 import './Task.scss';
@@ -8,13 +8,13 @@ import ModalEditar from './EditTask';
 import axios from 'axios';
 
 export default function FormPropsTextFields() {
-  const id_user = localStorage.getItem('id');
-  const idTarea = localStorage.getItem('_id');
+  const id_persona = localStorage.getItem('_id');
+  console.log(id_persona);
 
   const [employees, setEmployees] = useState([]);
 
   const getData = async () => {
-    let url = 'http://localhost:4000/api/tareas/idusuario'
+    let url = `http://localhost:4000/api/tareas/${id_persona}`
 
     const response = await axios.get(url)
     console.log('response', response)
@@ -36,10 +36,18 @@ export default function FormPropsTextFields() {
     return employees && employees.map(({ _id, imgtarea, nametarea, prioridadtarea, fechavencimiento }) => {
       return (
         <tr key={_id}>
-          <td>{imgtarea}</td>
-          <td>{nametarea}</td>
-          <td>{prioridadtarea}</td>
-          <td>{fechavencimiento}</td>
+          <td>
+            <Image src={imgtarea} alt="Imagen de la tarea" class="imgTarea" width="80" rounded />
+          </td>
+          <td>
+            <input type="text" value={nametarea} />
+          </td>
+          <td>
+            {prioridadtarea}
+          </td>
+          <td>
+            {fechavencimiento}
+          </td>
           <td className='opration'>
             <ButtonGroup aria-label="Basic example">
               <ModalEditar/>
@@ -53,7 +61,7 @@ export default function FormPropsTextFields() {
     })
   }
   const editarData = (_id) => {
-    let url = `http://localhost:4000/api/tareas/${idTarea}`
+    let url = `http://localhost:4000/api/tareas/${id_persona}`
 
     axios.update(url).then(res => {
       const edit = employees.filter(employee => _id !== employee._id)
@@ -62,7 +70,7 @@ export default function FormPropsTextFields() {
     })
   }
   const removeData = (_id) => {
-    let url = `http://localhost:4000/api/tareas/${idTarea}`
+    let url = `http://localhost:4000/api/tareas/${id_persona}`
 
     axios.delete(url).then(res => {
       const del = employees.filter(employee => _id !== employee._id)

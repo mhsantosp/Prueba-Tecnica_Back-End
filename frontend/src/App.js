@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import Ingresar from "./components/form/SingIn";
-import NuevoUsuario from "./components/form/SingUp";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/footer";
+import Ingresar from "./components/form/prueba";
+import NuevoUsuario from "./components/form/SingUp";
 import Perfil from "./components/form/Perfil";
 import Tareas from "./components/task/CollectionTasks"
 
