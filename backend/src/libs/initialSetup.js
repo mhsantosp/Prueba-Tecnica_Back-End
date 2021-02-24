@@ -1,4 +1,4 @@
-import Role from '../models/Roles';
+import Role from '../models/Role';
 
 export const createRoles = async () => {
 
@@ -9,10 +9,10 @@ export const createRoles = async () => {
     const values = await Promise.all([
       new Role({ name: "admin" }).save(),
       new Role({ name: "moderador" }).save(),
-      new Role({ name: "user" }).save()
+      new Role({ name: "user" }).save(),
     ]);
-    console.log(values);
+    console.log('Values', values);
   } catch (err) {
-    console.err(err);
+    console.err('Error', err);
   }
 };

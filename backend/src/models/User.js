@@ -3,21 +3,21 @@ import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema(
   {
-    nameUser: {
-      type: String
-    },
+    // nameUser: {
+    //   type: String
+    // },
     email: {
       type: String
     },
     password: {
       type: String
     },
-    roles: [
-      {
-        ref: "Roles",
-        type: Schema.Types.ObjectId
-      }
-    ]
+    // roles: [
+    //   {
+    //     ref: "Roles",
+    //     type: Schema.Types.ObjectId
+    //   }
+    // ]
   },
   {
     timestamps: true, //fecha de creación y actualización

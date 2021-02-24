@@ -3,6 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 import pkg from '../package.json';
 import tareasRoutes from './routes/tasks.routes';
+import personasRoutes from './routes/person.routes';
 import authRoutes from './routes/auth.routes';
 
 const app = express();
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/tasks', tareasRoutes);
+app.use('/persons', personasRoutes);
 app.use('/auth', authRoutes);
 
 export default app;
