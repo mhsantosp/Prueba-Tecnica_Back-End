@@ -8,11 +8,19 @@ const token = require('sha1');
 //consultas
 router.get("/personas", async (req, res) => {
   const db = await connection();
-  await db.collection("personas").find()
-  .toArray(function (err, personas) {
-      res.json(personas);
-    });
+
+  const { email, pasword } = req.body;
+  console.log('res.body', req.body);
+  const user = await db.collection("personas").findOne({"email":email,"pasword":pasword});
+  console.log('user', user);
+  res.json(user);
+
+  // await db.collection("personas").find()
+  // .toArray(function (err, personas) {
+  //     res.json(personas);
+  //   });
 });
+
 router.get("/personas/:id", async (req, res) => {
   const db = await connection();
   const id = req.params.id;

@@ -1,15 +1,16 @@
-//configurarciones
+//configurarciones palicación express
 import express from 'express';
 import morgan from 'morgan';
 import pkg from '../package.json';
-
-import tareasRoutes from './routes/task.routes'
+import tareasRoutes from './routes/tasks.routes';
+import authRoutes from './routes/auth.routes';
 
 const app = express();
 
-app.set('pkg', pkg);
+app.set('pkg', pkg); /* asignar un nombre y valor a la variable, guardarlo en express para luego optenerlo */
 
 app.use(morgan('dev'));
+app.use(express.json()); //entender que datos que llegan en formato json
 
 app.get('/', (req, res) => {
   res.json({
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
   })
 })
 
-app.use('/tareas', tareasRoutes);
+app.use('/tasks', tareasRoutes);
+app.use('/auth', authRoutes);
 
 export default app;
