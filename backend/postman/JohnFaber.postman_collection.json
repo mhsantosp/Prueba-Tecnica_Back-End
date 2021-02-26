@@ -1,0 +1,407 @@
+{
+	"info": {
+		"_postman_id": "45cdc5cf-9b76-4de9-89c9-5c0fba137b50",
+		"name": "JohnFaber",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Prueba Técnica",
+			"item": [
+				{
+					"name": "Autenticación",
+					"item": [
+						{
+							"name": "Sign Up - Registros User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"imgPerfil\": \"https://i.pinimg.com/originals/00/1a/da/001adade29cd2aa3c8e9c9cac9cdfc4c.png\",\r\n    \"names\": \"Sakura Tokio\",\r\n    \"lastNames\": \"Dango K-nomotho\",\r\n    \"nameUser\": \"sakuracard\",\r\n    \"email\": \"sakcard@user.es\",\r\n    \"password\": \"password\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/auth/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sign In - Inicio Sesión",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"sakura@user.es\",\r\n    \"password\": \"password\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/auth/signin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Usuarios",
+					"item": [
+						{
+							"name": "Usuarios Nuevos",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"imgPerfil\": \"https://i.pinimg.com/originals/00/1a/da/001adade29cd2aa3c8e9c9cac9cdfc4c.png\",\r\n    \"names\": \"Matheo\",\r\n    \"lastNames\": \"Mayorca\",\r\n    \"nameUser\": \"theo-card\",\r\n    \"email\": \"theo@user.es\",\r\n    \"password\": \"password\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Usuarios Buscar todos",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:4000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Usuario por Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:4000/users/60388feea3ead406343ac345",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										"60388feea3ead406343ac345"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Usuario:id Actualizar",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"lastNames\": \"Dango Knomotho\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/users/60388feea3ead406343ac345",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										"60388feea3ead406343ac345"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Usuario:id Eliminar",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:4000/users/60366aa7a5318841dc49d672",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										"60366aa7a5318841dc49d672"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tareas",
+					"item": [
+						{
+							"name": "Tareas Crear",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzg4ZmVlYTNlYWQ0MDYzNDNhYzM0NSIsImlhdCI6MTYxNDMyMDk2NywiZXhwIjoxNjE0NDA3MzY3fQ.-Mz0mCy_ADg9qR7Aw7OTDqfD31wEz10XDjsVbVTI7XU",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"imgTarea\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHRloLQfjNM4B18TGdCeRjur6tjv9wNP9WZA&usqp=CAU\",\r\n    \"nameTarea\": \"Tarea 6\",\r\n    \"prioridadTarea\": \"Alta\",\r\n    \"fechaVencimiento\": \"2021-02-28\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/tasks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tareas Buscar todos",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:4000/tasks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tareas Id Buscar",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:5000/tasks/6035fda467968237440b25a3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"tasks",
+										"6035fda467968237440b25a3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "task:id Actualizar",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nameTarea\": \"Tarea 3\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/tasks/6035fda467968237440b25a3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"tasks",
+										"6035fda467968237440b25a3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "task:id Eliminar",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzg4ZmVlYTNlYWQ0MDYzNDNhYzM0NSIsImlhdCI6MTYxNDMyMTQzOCwiZXhwIjoxNjE0NDA3ODM4fQ.yK9e67LqQNcisoi5lAEdX9kO46SqGE5rx4FRAo0Wiy4",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:4000/tasks/60361f7d257d9638c8675b27",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"tasks",
+										"60361f7d257d9638c8675b27"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

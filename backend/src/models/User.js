@@ -3,21 +3,36 @@ import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema(
   {
-    // nameUser: {
-    //   type: String
-    // },
+    imgPerfil: {
+      type: String,
+      unique: true,
+    },
+    names: {
+      type: String,
+      unique: true,
+    },
+    lastNames: {
+      type: String,
+      unique: true,
+    },
+    nameUser: {
+      type: String,
+      unique: true,
+    },
     email: {
-      type: String
+      type: String,
+      unique: true,
     },
     password: {
-      type: String
+      type: String,
+      unique: true,
     },
-    // roles: [
-    //   {
-    //     ref: "Roles",
-    //     type: Schema.Types.ObjectId
-    //   }
-    // ]
+    roles: [
+      {
+        ref: "Role",
+        type: Schema.Types.ObjectId,
+      }
+    ]
   },
   {
     timestamps: true, //fecha de creación y actualización
