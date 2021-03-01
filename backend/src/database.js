@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import config from "./config";
 
-mongoose.connect("mongodb://127.0.0.1:27017/pruebatecback", {
+mongoose.connect(config.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: true,

@@ -3,8 +3,8 @@ import User from "../models/User";
 export const createUser= async (req, res) => {
   res.json('Usuario creado');
   // //datos que se extraen del body
-  // const { imgPerfil, names, lastNames, email, nameUser, password } = req.body
-  // const newUser = new User({imgPerfil, names, lastNames, email, nameUser, password});
+  // const { names, lastNames, email, nameUser, password } = req.body
+  // const newUser = new User({names, lastNames, email, nameUser, password});
   // const userSaved = await newUser.save();
   // res.status(201).json(userSaved);
 }
@@ -15,7 +15,7 @@ export const getUsers = async (req, res) => {
 }
 
 export const getUserById = async (req, res) => {
-  const user = await User.findById(req.params.userId);
+  const user = await User.findOne(req.params.userId);
   res.status(200).json(user);
 }
 

@@ -3,10 +3,6 @@ import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema(
   {
-    imgPerfil: {
-      type: String,
-      unique: true,
-    },
     names: {
       type: String,
       unique: true,

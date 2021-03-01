@@ -2,6 +2,7 @@
 import app from './app';
 import './database';
 
-app.listen(4000, function() {
-  console.log('Servidor conectado en el puerto', 4000);
+// Inicio el servidor en el puerto que le indique
+app.listen(app.get('port'), () => {
+  console.log(`Servidor conectado en el puerto ${app.get('port')}`);
 });

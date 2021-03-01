@@ -5,9 +5,9 @@ import config from "../config";
 
 //Registro Nuevos usuarios
 export const signUp = async (req, res) => {
-  const { imgPerfil, names, lastNames, nameUser, email, password, roles } = req.body;
+  const { names, lastNames, nameUser, email, password, roles } = req.body;
 
-  const newUser = new User({ imgPerfil, names, lastNames, nameUser, email, password: await User.encryptPassword(password) });
+  const newUser = new User({ names, lastNames, nameUser, email, password: await User.encryptPassword(password) });
 
   if (roles) {
     const foundRoles = await Role.find({ name: { $in: roles } });
@@ -35,5 +35,6 @@ export const signIn = async (req, res) => {
 
   const token = jwt.sign({ id: userFound._id }, config.SECRET, { expiresIn: 86400 });
 
-  res.json({ token });
+  // res.json({ token });
+  res.json({ token, userFound });
 };
