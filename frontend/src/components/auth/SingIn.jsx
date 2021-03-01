@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import './SingIn-Up.scss';
+import React from 'react';
+import './Auth.scss';
 import logo2 from '../../images/avater.png';
 import { Link } from "react-router-dom";
-import { InputGroup, Button, Row, Col, Image } from 'react-bootstrap';
+import { InputGroup, Button, Image } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import Axios from "axios";
 
 export default function Prueba() {
-  const [formValues, setFormValues] = useState();
-  const URL = 'http://localhost:4000/api/personas/';
+  const URL = 'http://localhost:3000/auth/signin';
 
   const formSchema = Yup.object().shape({
     email: Yup.string().required("Campo requerido").email("Correo Electronico Invalido"),
-    pasword: Yup.string().required("Campo Requerido").min(8, `Mínimo 8 caracteres`),
+    password: Yup.string().required("Campo Requerido").min(8, `Mínimo 8 caracteres`)
   });
 
   return (
@@ -24,43 +23,35 @@ export default function Prueba() {
           <div className="form">
             <div className="form-log-in">
               <Formik
-                initialValues={{ email: "", pasword: "" }}
-
+                initialValues={{ email: '', password: '' }}
                 validationSchema={formSchema}
-
                 onSubmit={(values) => {
+                  alert("Ingreso valido!");
                   console.log(values);
                   // Enviar los valores a la Base de Datos
-                  Axios.get(`http://localhost:4000/api/personas/:id`)
+                  const dataInicio = { email: values.email, password: values.password }
+                  Axios.post(URL, dataInicio)
                     .then(res => {
-                      console.log(res.data);
+                      console.log(res.data.userFound)
+                      if (res.data) {
+                        let data = res.data;
+                        localStorage.setItem('_id', data.userFound['_id'], { path: "/" });
+                        localStorage.setItem('names', data.userFound['names'], { path: "/" });
+                        localStorage.setItem('lastNames', data.userFound['lastNames'], { path: "/" });
+                        localStorage.setItem('email', data.userFound['email'], { path: "/" });
+                        localStorage.setItem('nameUser', data.userFound['nameUser'], { path: "/" });
+                        window.location.href = '/registro-usuario'; // redirecciona a registro de nuevo usuario
+                      } else {
+                        console.log('Algo salio muy mal!!')
+                      }
                       return res.data;
                     })
-                    .then(res => {
-                      if (res.length > 0) {
-                        localStorage.setItem('_id', res._id, { path: "/" });
-                        localStorage.setItem('nombres', res.nombres, { path: "/" });
-                        localStorage.setItem('apellidos', res.apellidos, { path: "/" });
-                        localStorage.setItem('email', res.email, { path: "/" });
-                        localStorage.setItem('usuario', res.usuario, { path: "/" });
-                        // window.location.href = '/inicio'; //Ruta de redirección
-                        // console.log(`Usuario correcto: Bienbenid@ ${res.name} ${res.lastname}`);
-                      } else {
-                        console.log('Usuario y/o Password incorrecto');
-                      }
+                    .catch(err => {
+                      console.log('Error', err);
                     })
                 }}
               >
-                {({
-                  values,
-                  errors,
-                  touched,
-                  handleSubmit,
-                  handleChange,
-                  isSubmitting,
-                  validating,
-                  valid,
-                }) => {
+                {({ values, errors, touched, handleSubmit, handleBlur, handleChange, isSubmitting, validating, valid }) => {
                   return (
                     <Form className="card-body" onSubmit={handleSubmit} >
                       <div className="form-row">
@@ -77,13 +68,14 @@ export default function Prueba() {
                               id="email"
                               value={values.email}
                               onChange={handleChange}
+                              onBlur={handleBlur}
                             />
                           </InputGroup>
                           <ErrorMessage name="email" component="div" className="field-error text-danger" />
                         </div>
 
                         <div className="form-group col-sm-12 col-md-12">
-                          <label htmlFor="pasword">Contraseña</label>
+                          <label htmlFor="password">Contraseña</label>
                           <InputGroup>
                             <InputGroup.Prepend>
                               <InputGroup.Text><i className="fas fa-user-lock"></i></InputGroup.Text>
@@ -91,22 +83,23 @@ export default function Prueba() {
                             <Field className="form-control"
                               placeholder="**********"
                               type="password"
-                              name="pasword"
-                              id="pasword"
-                              value={values.pasword}
+                              name="password"
+                              id="password"
+                              value={values.password}
                               onChange={handleChange}
+                              onBlur={handleBlur}
                             />
                           </InputGroup>
-                          <ErrorMessage name="pasword" component="div" className="field-error text-danger" />
+                          <ErrorMessage name="password" component="div" className="field-error text-danger" />
                         </div>
                       </div>
 
                       <Button
+                        className="btn-form"
                         type="submit"
                         variant="info"
-                        className="btn-form"
-                        disabled={isSubmitting}>
-                        Iniciar sesión
+                        disabled={isSubmitting}
+                      >Iniciar sesión
                       </Button>
                     </Form>
                   )
@@ -114,7 +107,7 @@ export default function Prueba() {
               </Formik>
               <div className="card-footer">
                 <p className="card-text text-right">
-                  No estas registrado? <Link to="/nuevo-usuario" rel="noopener noreferrer">Regístrate</Link>
+                  No estas registrado? <Link to="/registro-usuario" rel="noopener noreferrer">Regístrate</Link>
                 </p>
               </div>
             </div>

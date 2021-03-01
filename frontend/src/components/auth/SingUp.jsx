@@ -1,40 +1,38 @@
 import React, { useState } from 'react';
-import './SingIn-Up.scss';
+import './Auth.scss';
 import logo2 from '../../images/avater.png';
 import { Link } from "react-router-dom";
 import { Form, InputGroup, Button, Col } from 'react-bootstrap';
 import { useFormik } from "formik";
 import Axios from "axios";
 
-export default function Prueba() {
-  const [data, setData] = useState({});
-
-  const URL = 'http://localhost:4000/api/personas';
+export default function NuevoUsuario() {
+  const URL = 'http://localhost:3000/auth/signup';
 
   const { values, isSubmitting, handleSubmit, handleChange, errors } = useFormik({
     initialValues: {
-      nombres: '', apellidos: '', email: '', usuario: '', pasword: '',
+      names: '', lastNames: '', email: '', nameUser: '', password: '',
     },
     onSubmit: values => {
       console.log(values);
       // Enviar los valores a la Base de Datos
       Axios.post(URL, {
-        nombres: values.nombres,
-        apellidos: values.apellidos,
+        names: values.names,
+        lastNames: values.lastNames,
         email: values.email,
-        usuario: values.usuario,
-        pasword: values.pasword
+        nameUser: values.nameUser,
+        password: values.password
       })
-        .then(response => {
-          console.log(response);
-          setData(response.data);
-          window.location.href = '/';
+        .then(res => {
+          console.log(res);
+          window.location.href = '/'; //redirecciona al inicio de sesión
+          return res.data;
         })
     },
     validate: values => {
       const errors = {};
-      if (!values.nombres || values.nombres.length < 2) errors.nombres = "Nombre inválido";
-      if (!values.apellidos || values.apellidos.length < 2) errors.apellidos = "Apellido inválido";
+      if (!values.names || values.names.length < 2) errors.names = "Nombre inválido";
+      if (!values.lastNames || values.lastNames.length < 2) errors.lastNames = "Apellido inválido";
       if (!values.email) {
         errors.email = 'Requerido';
       } else if (
@@ -43,15 +41,15 @@ export default function Prueba() {
         errors.email = 'Correo electrónico inválido';
       }
 
-      if (!values.usuario || values.usuario.length < 2) errors.usuario = "Usuario inválido";
+      if (!values.nameUser || values.nameUser.length < 2) errors.nameUser = "Usuario inválido";
 
       const passwordRegex = /(?=.*[0-9])/;
-      if (!values.pasword) {
-        errors.pasword = "Requerido";
-      } else if (values.pasword.length < 8) {
-        errors.pasword = "La contraseña debe tener 8 caracteres.";
-      } else if (!passwordRegex.test(values.pasword)) {
-        errors.pasword = "Contraseña invalida. Debe contener un número.";
+      if (!values.password) {
+        errors.password = "Requerido";
+      } else if (values.password.length < 8) {
+        errors.password = "La contraseña debe tener 8 caracteres.";
+      } else if (!passwordRegex.test(values.password)) {
+        errors.password = "Contraseña invalida. Debe contener un número.";
       }
 
       return errors;
@@ -70,25 +68,25 @@ export default function Prueba() {
                   <Form.Group as={Col} sm="12" md="6">
                     <Form.Label>Nombres</Form.Label>
                     <Form.Control
-                      value={values.nombres}
+                      value={values.names}
                       onChange={handleChange}
-                      name="nombres"
+                      name="names"
                       placeholder="Nombres"
                       type="text"
                     />
-                    <Form.Text>{errors.nombres ? errors.nombres : ''}</Form.Text>
+                    <Form.Text>{errors.names ? errors.names : ''}</Form.Text>
                   </Form.Group>
 
                   <Form.Group as={Col} sm="12" md="6">
                     <Form.Label>Apellidos</Form.Label>
                     <Form.Control
-                      value={values.apellidos}
+                      value={values.lastNames}
                       onChange={handleChange}
-                      name="apellidos"
+                      name="lastNames"
                       placeholder="Apellidos"
                       type="text"
                     />
-                    <Form.Text>{errors.apellidos ? errors.apellidos : ''}</Form.Text>
+                    <Form.Text>{errors.lastNames ? errors.lastNames : ''}</Form.Text>
                   </Form.Group>
 
                   <Form.Group as={Col} sm="12" md="12">
@@ -115,14 +113,14 @@ export default function Prueba() {
                         <InputGroup.Text><i className="fas fa-at"></i></InputGroup.Text>
                       </InputGroup.Prepend>
                       <Form.Control
-                        value={values.usuario}
+                        value={values.nameUser}
                         onChange={handleChange}
-                        name="usuario"
+                        name="nameUser"
                         placeholder="Usuario"
                         type="text"
                       />
                     </InputGroup>
-                    <Form.Text>{errors.usuario ? errors.usuario : ''}</Form.Text>
+                    <Form.Text>{errors.nameUser ? errors.nameUser : ''}</Form.Text>
                   </Form.Group>
 
                   <Form.Group as={Col} sm="12" md="6">
@@ -132,14 +130,14 @@ export default function Prueba() {
                         <InputGroup.Text><i className="fas fa-user-lock"></i></InputGroup.Text>
                       </InputGroup.Prepend>
                       <Form.Control
-                        value={values.pasword}
+                        value={values.password}
                         onChange={handleChange}
-                        name="pasword"
+                        name="password"
                         placeholder="**********"
                         type="password"
                       />
                     </InputGroup>
-                    <Form.Text>{errors.pasword ? errors.pasword : ''}</Form.Text>
+                    <Form.Text>{errors.password ? errors.password : ''}</Form.Text>
                   </Form.Group>
                 </Form.Row>
                 <Button type="submit" variant="info" className="btn-form" disabled={isSubmitting}>Registrarse</Button>

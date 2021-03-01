@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import Logo from '../../images/logo.svg';
 import './Header.scss';
 
 export default class Header extends React.Component {
   state = {
-    usuario: localStorage.getItem('nombres')
+    nameUser: localStorage.getItem('nameUser')
   }
 
   cerrarSesion = () => {
@@ -13,8 +13,8 @@ export default class Header extends React.Component {
     localStorage.removeItem('nombres', { path: "/" });
     localStorage.removeItem('apellidos', { path: "/" });
     localStorage.removeItem('email', { path: "/" });
-    localStorage.removeItem('usuario', { path: "/" });
-    window.location.href = '/';
+    localStorage.removeItem('nameUser', { path: "/" });
+    window.location.href = '/'; // redireciona al inicio de sesión
   }
 
   render() {
@@ -30,11 +30,11 @@ export default class Header extends React.Component {
           </Navbar.Brand>
           <Nav className="ml-auto">
             {
-              this.state.usuario == null
+              this.state.nameUser == null
                 ?
                 <Nav.Link href="/">Ingresar</Nav.Link>
                 :
-                <NavDropdown title={localStorage.getItem('nombres')} id="collasible-nav-dropdown">
+                <NavDropdown title={localStorage.getItem('nameUser')} id="collasible-nav-dropdown">
                   <NavDropdown.Item href="/perfil">Perfil</NavDropdown.Item>
                   <NavDropdown.Item href="/tareas">Tareas</NavDropdown.Item>
                   <NavDropdown.Item onClick={() => this.cerrarSesion()}>Salir</NavDropdown.Item>
