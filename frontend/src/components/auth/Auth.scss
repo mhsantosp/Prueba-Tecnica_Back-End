@@ -4,7 +4,7 @@ section.registros {
   article.authenticateIdentity {
     height: 100%;
     display: flex;
-    
+
     .card {
       max-width: 450px;
       margin: auto;
@@ -26,8 +26,51 @@ section.registros {
         margin-top: 1rem;
         background-color: white;
       }
+
       div.form {
         form {
+          .fileImg {
+            background-color: white;
+            border-radius: 20px;
+            display: flex;
+            padding: 0;
+            border: 1px solid #804be4;
+            align-items: center;
+
+            label {
+              margin: 0;
+
+              span {
+                background-color: #e9ecef;
+                border-radius: 20px;
+                border-right: 1px solid #804be4;
+                padding: 0.375rem 0.75rem;
+                display: block;
+                &:hover {
+                  background-color: #2e86de;
+                  color: white;
+                }
+              }
+            }
+
+            input#icon-button-file {
+              width: 100%;
+              border-left: none;
+              border: none;
+              border-radius: 20px;
+              border-top-left-radius: initial;
+              border-bottom-left-radius: initial;
+              padding-left: 5px;
+              padding-right: 5px;
+              outline: none;
+            }
+
+            // Pseudo-elemento  CSS { ::-webkit-file-upload-button } representa el botón de los elementos <input> de  type="file".
+            input[type=file]::-webkit-file-upload-button {
+              display: none;
+            }
+          }
+
           button {
             border-radius: 20px;;
           }

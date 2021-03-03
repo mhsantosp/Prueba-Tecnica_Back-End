@@ -11,7 +11,7 @@ export default function NuevoUsuario() {
 
   const { values, isSubmitting, handleSubmit, handleChange, errors } = useFormik({
     initialValues: {
-      names: '', lastNames: '', email: '', nameUser: '', password: '',
+      names: '', lastNames: '', email: '', nameUser: '', password: '', imgPerfil: '',
     },
     onSubmit: values => {
       console.log(values);
@@ -21,7 +21,8 @@ export default function NuevoUsuario() {
         lastNames: values.lastNames,
         email: values.email,
         nameUser: values.nameUser,
-        password: values.password
+        password: values.password,
+        imgPerfil: values.imgPerfil,
       })
         .then(res => {
           console.log(res);
@@ -55,7 +56,7 @@ export default function NuevoUsuario() {
       return errors;
     }
   });
-  console.log(errors);
+  // console.log(errors);
   return (
     <section className="container-fluid registros">
       <article className="authenticateIdentity">
@@ -139,6 +140,24 @@ export default function NuevoUsuario() {
                     </InputGroup>
                     <Form.Text>{errors.password ? errors.password : ''}</Form.Text>
                   </Form.Group>
+
+                  <div className="form-group col-sm-12 col-md-12">
+                    <Form.Label>Imagen de perfil</Form.Label>
+                    <div className="fileImg">
+                      <label htmlFor="icon-button-file">
+                        <span color="primary" aria-label="upload picture" >
+                          <i className="fas fa-camera-retro" />
+                        </span>
+                      </label>
+                      <Form.Control
+                        type="file"
+                        accept="image/*"
+                        id="icon-button-file"
+                        value={values.imgPerfil}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
                 </Form.Row>
                 <Button type="submit" variant="info" className="btn-form" disabled={isSubmitting}>Registrarse</Button>
               </Form>

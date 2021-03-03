@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Auth.scss';
 import logo2 from '../../images/avater.png';
 import { Link } from "react-router-dom";
-import { InputGroup, Button, Image } from 'react-bootstrap';
+import { InputGroup, Button, Image, Alert } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import Axios from "axios";
 
 export default function Prueba() {
+  const [show, setShow] = useState(true);
   const URL = 'http://localhost:3000/auth/signin';
 
   const formSchema = Yup.object().shape({
@@ -26,13 +27,13 @@ export default function Prueba() {
                 initialValues={{ email: '', password: '' }}
                 validationSchema={formSchema}
                 onSubmit={(values) => {
-                  alert("Ingreso valido!");
+                  // alert("Ingreso valido!");
                   console.log(values);
                   // Enviar los valores a la Base de Datos
                   const dataInicio = { email: values.email, password: values.password }
                   Axios.post(URL, dataInicio)
                     .then(res => {
-                      console.log(res.data.userFound)
+                      // console.log(res.data.userFound)
                       if (res.data) {
                         let data = res.data;
                         localStorage.setItem('_id', data.userFound['_id'], { path: "/" });
