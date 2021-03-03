@@ -3,8 +3,8 @@ import User from "../models/User";
 export const createUser= async (req, res) => {
   res.json('Usuario creado');
   // //datos que se extraen del body
-  // const { names, lastNames, email, nameUser, password } = req.body
-  // const newUser = new User({names, lastNames, email, nameUser, password});
+  // const { names, lastNames, email, nameUser, password, imgPerfil } = req.body
+  // const newUser = new User({names, lastNames, email, nameUser, password, imgPerfil});
   // const userSaved = await newUser.save();
   // res.status(201).json(userSaved);
 }

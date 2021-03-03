@@ -23,6 +23,10 @@ const userSchema = new Schema(
       type: String,
       unique: true,
     },
+    imgPerfil: {
+      type: String,
+      unique: true,
+    },
     roles: [
       {
         ref: "Role",

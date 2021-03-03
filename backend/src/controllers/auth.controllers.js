@@ -5,9 +5,9 @@ import config from "../config";
 
 //Registro Nuevos usuarios
 export const signUp = async (req, res) => {
-  const { names, lastNames, nameUser, email, password, roles } = req.body;
+  const { names, lastNames, nameUser, email, password, imgPerfil, roles } = req.body;
 
-  const newUser = new User({ names, lastNames, nameUser, email, password: await User.encryptPassword(password) });
+  const newUser = new User({ names, lastNames, nameUser, email, password: await User.encryptPassword(password), imgPerfil });
 
   if (roles) {
     const foundRoles = await Role.find({ name: { $in: roles } });
@@ -18,7 +18,7 @@ export const signUp = async (req, res) => {
   }
 
   const savedUser = await newUser.save();
-  console.log(savedUser);
+  // console.log(savedUser);
   const token = jwt.sign({ id: savedUser._id }, config.SECRET, { expiresIn: 86400 });
   // console.log("token", token);
   res.json({ token });
@@ -28,7 +28,7 @@ export const signUp = async (req, res) => {
 export const signIn = async (req, res) => {
   const userFound = await User.findOne({ email: req.body.email }).populate("roles");
   if (!userFound) return res.status(400).json({ message: "Usuario no existe" });
-  console.log(userFound);
+  // console.log(userFound);
 
   const matchcPassword = await User.comparePassword( req.body.password, userFound.password );
   if (!matchcPassword) return res.status(401).json({ token: null, message: "Contraseña invalida" });
